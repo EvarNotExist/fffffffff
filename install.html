@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//api.bitrix24.com/api/v1/"></script>
+    <script type="text/javascript" src="js/jQuery.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div id="progBar"></div>
+        <script>
+        p = 0;
+        BX24.init(function(){
+            BX24.callMethod('entity.add', {
+                'ENTITY': 'librarybooktwo', 
+                'NAME': 'librarybooktwo', 
+                'ACCESS': {U1:'X', AU:'X'}
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+
+            BX24.callMethod('entity.add', {
+                'ENTITY': 'librarynotetwo', 
+                'NAME': 'librarynotetwo', 
+                'ACCESS': {U1:'X', AU:'X'}
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarybooktwo', 
+                PROPERTY: 'name', 
+                NAME: 'Name', 
+                TYPE: 'S'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarybooktwo', 
+                PROPERTY: 'author', 
+                NAME: 'Author', 
+                TYPE: 'S'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarybooktwo', 
+                PROPERTY: 'age', 
+                NAME: 'Age', 
+                TYPE: 'S'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarybooktwo', 
+                PROPERTY: 'tags', 
+                NAME: 'Tags', 
+                TYPE: 'S'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarybooktwo', 
+                PROPERTY: 'count', 
+                NAME: 'Count', 
+                TYPE: 'N'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarynotetwo', 
+                PROPERTY: 'bookid', 
+                NAME: 'BookId', 
+                TYPE: 'S'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarynotetwo', 
+                PROPERTY: 'employeeid', 
+                NAME: 'EmployeeId', 
+                TYPE: 'S'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarynotetwo', 
+                PROPERTY: 'date', 
+                NAME: 'Date', 
+                TYPE: 'S'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+            BX24.callMethod('entity.item.property.add', {
+                ENTITY: 'librarynotetwo', 
+                PROPERTY: 'returndate', 
+                NAME: 'Returndate', 
+                TYPE: 'S'
+            }, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+
+            BX24.callMethod('entity.section.add', {ENTITY: 'librarynotetwo', 'NAME': 'newnotes'}, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+            BX24.callMethod('entity.section.add', {ENTITY: 'librarynotetwo', 'NAME': 'oldnotes'}, function(res){ if (typeof(res.answer.result) != "undefined"){ p++; }});
+        });
+        const interBar = setInterval(function progress() {
+            bar = '<progress value="'+ p +'" max="13"></progress>';
+            document.getElementById("progBar").innerHTML = bar;
+            if (p >= 13) {
+                clearInterval(interBar);
+                setTimeout(BX24.installFinish(), 1000);
+            }
+        }, 1000);
+            
+        </script>
+    </div>
+</body>
+</html>
